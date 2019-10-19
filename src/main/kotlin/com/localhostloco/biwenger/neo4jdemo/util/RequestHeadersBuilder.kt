@@ -52,14 +52,8 @@ class RequestHeadersBuilder {
 
     var headers = HttpHeaders()
 
-    @Bean("login")
+    @Bean
     fun buildLoginHeaders(): HttpHeaders {
-        setup()
-        return headers
-    }
-
-    @Bean("auth")
-    fun buildHeadersWithToken(): HttpHeaders {
         setup()
         return headers
     }

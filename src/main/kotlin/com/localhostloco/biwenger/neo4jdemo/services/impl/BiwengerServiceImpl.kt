@@ -11,7 +11,6 @@ import com.localhostloco.biwenger.neo4jdemo.domain.models.response.LoginResponse
 import com.localhostloco.biwenger.neo4jdemo.services.BiwengerService
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -30,18 +29,14 @@ class BiwengerServiceImpl : BiwengerService {
     private var token: LoginResponse? = null
 
     @Autowired
-    @Qualifier("login")
-    lateinit var loginHeaders: HttpHeaders
+    lateinit var headers: HttpHeaders
 
-    @Autowired
-    @Qualifier("auth")
-    lateinit var authHeaders: HttpHeaders
     var restTemplate: RestTemplate = RestTemplate(HttpComponentsClientHttpRequestFactory())
 
     override fun login(): LoginResponse {
         var body = LoginRequest(System.getenv("email"), System.getenv("password"))
         var url: String = BaseUrlEnum.AUTH.url.plus(RequestEndpointsEnum.LOGIN.url)
-        var entity = HttpEntity(body, loginHeaders)
+        var entity = HttpEntity(body, headers)
         logger.info(entity.toString())
         var result: ResponseEntity<LoginResponse> = restTemplate.postForEntity(url = url, request = entity)
         token = result.body
@@ -51,10 +46,10 @@ class BiwengerServiceImpl : BiwengerService {
 
     override fun account(): AccountResponse {
         token ?: login()
-        authHeaders.set(HeadersEnum.AUTHORIZATION.header, "Bearer ".plus(token?.token))
+        headers.set(HeadersEnum.AUTHORIZATION.header, "Bearer ".plus(token?.token))
         var url = BaseUrlEnum.AUTH.url.plus(RequestEndpointsEnum.ACCOUNT.url)
         var respType = object : ParameterizedTypeReference<String>() {}
-        var entity = HttpEntity<String>(authHeaders)
+        var entity = HttpEntity<String>(headers)
         logger.info { entity.toString() }
         var result: ResponseEntity<String> = restTemplate.exchange(
                 url,

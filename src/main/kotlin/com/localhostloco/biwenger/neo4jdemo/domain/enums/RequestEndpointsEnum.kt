@@ -1,6 +1,6 @@
-package com.localhostloco.biwenger.neo4jdemo.data.request.headers
+package com.localhostloco.biwenger.neo4jdemo.domain.enums
 
-enum class RequestEndpointsEnum(url: String, auth: Boolean = true) {
+enum class RequestEndpointsEnum(val url: String, val auth: Boolean = true) {
     LOGIN("auth/login"),
     ACCOUNT("account"),
     HOME("home"),
@@ -8,5 +8,5 @@ enum class RequestEndpointsEnum(url: String, auth: Boolean = true) {
     USER("user?fields=*,lineup(type,playersID,captain),players(id,owner),market(*,-userID),offers,-trophies"),
     MARKET("market"),
     ROUNDS("rounds/league"),
-    LALIGA("competitions/la-liga/data", false)
+    LALIGA("competitions/la-liga/data", auth = false);
 }

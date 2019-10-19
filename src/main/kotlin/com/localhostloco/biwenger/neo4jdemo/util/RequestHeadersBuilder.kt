@@ -50,9 +50,21 @@ class RequestHeadersBuilder {
     @Value("\${biwenger.headers.x-version}")
     lateinit var x_version: String
 
+    var headers = HttpHeaders()
+
     @Bean("login")
     fun buildLoginHeaders(): HttpHeaders {
-        var headers = HttpHeaders()
+        setup()
+        return headers
+    }
+
+    @Bean("auth")
+    fun buildHeadersWithToken(): HttpHeaders {
+        setup()
+        return headers
+    }
+
+    fun setup() {
         headers.add(HeadersEnum.ACCEPT.header, accept)
         headers.add(HeadersEnum.ACCEPT_ENCONDING.header, accept_encoding)
         headers.add(HeadersEnum.ACCEPT_LANGUAGE.header, accept_language)
@@ -71,7 +83,5 @@ class RequestHeadersBuilder {
         headers.add(HeadersEnum.USER_AGENT.header, user_agent)
         headers.add(HeadersEnum.X_LANG.header, x_lang)
         headers.add(HeadersEnum.X_VERSION.header, x_version)
-        return headers
     }
-
 }

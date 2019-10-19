@@ -10,7 +10,6 @@ enum class HeadersEnum(val header: String) {
     CONNECTION("Connection"),
     CONTENT_LENGTH("content-length"),
     CONTENT_TYPE("content-type"),
-    COOKIE("cookie"),
     DNT("dnt"),
     HOST("Host"),
     METHOD("method"),

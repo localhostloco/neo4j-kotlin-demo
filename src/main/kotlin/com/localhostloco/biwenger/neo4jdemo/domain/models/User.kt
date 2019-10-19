@@ -6,9 +6,9 @@ data class User(
         val favorites: List<Any>?,
         val group: String?,
         val icon: String?,
-        @Nullable val id: Integer?,
+        @Nullable val id: Int?,
         val name: String?,
-        val position: Integer?,
+        val position: Int?,
         val status: Status?,
         val type: String?,
         val upgrades: Upgrades?

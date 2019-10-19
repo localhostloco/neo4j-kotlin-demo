@@ -4,12 +4,12 @@ import org.springframework.lang.Nullable
 
 data class League(
         val competition: String?,
-        val created: Integer?,
+        val created: Int?,
         val icon: String?,
-        @Nullable val id: Integer?,
+        @Nullable val id: Int?,
         val mode: String?,
         val name: String?,
-        val scoreID: Integer?,
+        val scoreID: Int?,
         val settings: Settings?,
         val type: String?,
         val upgrades: Upgrades?,

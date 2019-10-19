@@ -27,8 +27,6 @@ class RequestHeadersBuilder {
     lateinit var content_length: String
     @Value("\${biwenger.headers.content-type}")
     lateinit var content_type: String
-    @Value("\${biwenger.headers.cookie}")
-    lateinit var cookie: String
     @Value("\${biwenger.headers.dnt}")
     lateinit var dnt: String
     @Value("\${biwenger.headers.method}")

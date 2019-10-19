@@ -1,0 +1,22 @@
+biwenger:
+  headers:
+    accept: application/json, text/plain, */*
+    accept-encoding: gzip, deflate, br
+    accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7,pt;q=0.6
+    authority: biwenger.as.com
+    cache_control: no-cache
+    connection: keep-alive
+    content-length: 76
+    content-type: application/json; charset=UTF-8
+    dnt: 1
+    host: biwenger.as.com
+    method: POST
+    origin: https://biwenger.as.com
+    path: /api/v2/auth/login
+    referer: https://biwenger.as.com/
+    scheme: https
+    sec-fetch-mode: cors
+    sec-fetch-site: same-origin
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,like Gecko) Chrome/77.0.3865.90 Safari/537.36
+    x-lang: es
+    x-version: 587

@@ -8,7 +8,6 @@ import com.localhostloco.biwenger.neo4jdemo.services.BiwengerService
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -22,24 +21,19 @@ import org.springframework.web.client.postForEntity
 class BiwengerServiceImpl : BiwengerService {
     private val logger = KotlinLogging.logger {}
 
-    @Value("\${biwenger.credentials.email}")
-    lateinit var email: String
-
-    @Value("\${biwenger.credentials.password}")
-    lateinit var password: String
-
     @Autowired
     @Qualifier("login")
-    lateinit var headers: HttpHeaders
+    lateinit var loginHeaders: HttpHeaders
 
     override fun login(): LoginResponse {
-        var body = LoginRequest(email, password)
+        var body = LoginRequest(System.getenv("email"), System.getenv("password"))
         var url: String = BaseUrlEnum.AUTH.url.plus(RequestEndpointsEnum.LOGIN.url)
-        var entity = HttpEntity(body, headers)
+        var entity = HttpEntity(body, loginHeaders)
         logger.info(entity.toString())
         var restTemplate: RestTemplate = RestTemplate(HttpComponentsClientHttpRequestFactory())
         var result: ResponseEntity<LoginResponse> = restTemplate.postForEntity(url = url, request = entity)
         var token = result.body
+        logger.info(token.toString())
         return token!!
     }
 
